@@ -121,6 +121,71 @@ class iImageNet100(iData):
         self.test_data, self.test_targets = split_images_labels(test_dset.imgs)
 
 
+class vtab(iData):
+    
+    use_path = True
+    train_trsf = [
+        transforms.RandomResizedCrop(224),
+        transforms.RandomHorizontalFlip(),
+    ]
+    test_trsf = [
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
+    ]
+    common_trsf = [
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ]
+
+    gdrive_id = "1xUiwlnx4k0oDhYi26KL5KwrCAya-mvJ_"
+
+    class_order = np.arange(50).tolist()
+
+    def download_data(self):
+        # assert 0, "You should specify the folder of your dataset"
+        train_dir = "../RanPAC/data/vtab/vtab/train/"
+        test_dir = "../RanPAC/data/vtab/vtab/test/"
+
+        train_dset = datasets.ImageFolder(train_dir)
+        test_dset = datasets.ImageFolder(test_dir)
+
+        print(train_dset.class_to_idx)
+        print(test_dset.class_to_idx)
+
+        self.train_data, self.train_targets = split_images_labels(train_dset.imgs)
+        self.test_data, self.test_targets = split_images_labels(test_dset.imgs)
+
+class iImageNetA(iData):
+    use_path = True
+    train_trsf = [
+        transforms.RandomResizedCrop(224),
+        transforms.RandomHorizontalFlip(),
+    ]
+    test_trsf = [
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
+    ]
+    common_trsf = [
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ]
+
+    gdrive_id = "19l52ua_vvTtttgVRziCZJjal0TPE9f2p"
+
+    class_order = np.arange(200).tolist()
+
+    def download_data(self):
+        #
+        train_dir = "../RanPAC/data/imageneta/imagenet-a/train"
+        test_dir = "../RanPAC/data/imageneta/imagenet-a/test"
+
+        train_dset = datasets.ImageFolder(train_dir)
+        test_dset = datasets.ImageFolder(test_dir)
+
+        self.train_data, self.train_targets = split_images_labels(train_dset.imgs)
+        self.test_data, self.test_targets = split_images_labels(test_dset.imgs)
+
+
 class iImageNetR(iData):
     use_path = True
     train_trsf = [

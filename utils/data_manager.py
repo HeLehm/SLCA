@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 from torch.utils.data import Dataset
 from torchvision import transforms
-from utils.data import iCIFAR10, iCIFAR100, iImageNet100, iImageNet1000, iCIFAR100_224, iImageNetR, iCUB200_224, iResisc45_224, iCARS196_224, iSketch345_224
+from utils.data import iCIFAR10, iCIFAR100, iImageNet100, iImageNet1000, iCIFAR100_224, iImageNetR, iCUB200_224, iResisc45_224, iCARS196_224, iSketch345_224, iImageNetA, vtab 
 from copy import deepcopy
 import random
 
@@ -195,6 +195,10 @@ def _get_idata(dataset_name):
         return iImageNet100()
     elif name == "imagenet-r":
         return iImageNetR()
+    elif name == 'imageneta':
+        return iImageNetA()
+    elif name == 'vtab':
+        return vtab()
     elif name == 'cub200_224':
         return iCUB200_224()
     elif name == 'resisc45':
