@@ -121,6 +121,36 @@ class iImageNet100(iData):
         self.test_data, self.test_targets = split_images_labels(test_dset.imgs)
 
 
+class Omni(iData):
+    
+    use_path = True
+    train_trsf = [
+        transforms.RandomResizedCrop(224),
+        transforms.RandomHorizontalFlip(),
+    ]
+    test_trsf = [
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
+    ]
+    common_trsf = [
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+    ]
+    #https://drive.google.com/file/d/1GozYc4T5s3MkpEtYRoRhW92T-0sW4pFV/view?usp=sharing
+    gdrive_id="1GozYc4T5s3MkpEtYRoRhW92T-0sW4pFV"
+    class_order = np.arange(300).tolist()
+
+    def download_data(self):
+        # assert 0, "You should specify the folder of your dataset"
+        train_dir = "../RanPAC/data/omnibenchmark/omnibenchmark/train/"
+        test_dir = "../RanPAC/data/omnibenchmark/omnibenchmark/test/"
+
+        train_dset = datasets.ImageFolder(train_dir)
+        test_dset = datasets.ImageFolder(test_dir)
+
+        self.train_data, self.train_targets = split_images_labels(train_dset.imgs)
+        self.test_data, self.test_targets = split_images_labels(test_dset.imgs)
+
 class vtab(iData):
     
     use_path = True
