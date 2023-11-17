@@ -202,8 +202,8 @@ class SLCA(BaseLearner):
                 cls_mean = torch.tensor(self._class_means[c_id], dtype=torch.float64).to(self._device)*(0.9+decay) # torch.from_numpy(self._class_means[c_id]).to(self._device)
                 cls_cov = self._class_covs[c_id].to(self._device)
 
-                # add 1e-7 identity to cov
-                cls_cov = cls_cov + torch.eye(cls_cov.size(0)).to(self._device)*1e-7
+                # add identity to cov
+                cls_cov = cls_cov + torch.eye(cls_cov.size(0)).to(self._device)
                 
                 m = MultivariateNormal(cls_mean.float(), cls_cov.float())
 
